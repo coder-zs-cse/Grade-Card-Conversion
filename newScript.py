@@ -38,16 +38,8 @@ def read_csv_to_dict(filepath):
     print(f'Error: File {filepath} not found.')
     return None
 
-if __name__ == "__main__":
-  # Example usagestudent
 
-  students = read_csv_to_dict(filepath)
-
-  # if data_dict is not None:
-  #   # Access data in the dictionary
-  #   print(data_dict.keys())  # Print column names (keys)
-  #   # print(data_dict["column_name"])  # Access values by column name (key)
-
+students = read_csv_to_dict(filepath)
 
 
 def calculateCreditPoints(gd,credit):
@@ -128,11 +120,6 @@ for student in students:
   
 
 
-# print(studentData)``
-
-
-
-# Sample dictionary
 data = studentData
 header = ['ORG_NAME','ORG_NAME_L','ACADEMIC_COURSE_ID','COURSE_NAME','COURSE_NAME_L','STREAM','STREAM_L','SESSION','REGN_NO','RROLL','CNAME','GENDER','DOB','FNAME','MNAME','PHOTO','MRKS_REC_STATUS','RESULT', 'YEAR','MONTH','DIVISION','GRADE','PERCENT','DOI','SEM','EXAM_TYPE', 'TOT', 'TOT_MKS', 'TOT_CREDIT', 'TOT_CREDIT_POINTS', 'TOT_GRADE_POINTS','GRAND_TOT_MAX','GRAND_TOT_MRKS','GRAND_TOT_CREDIT_POINTS','CGPA','REMARKS','SGPA','ABC_ACCOUNT_ID','TERM_TYPE','TOT_GRADE']
 for i in range(1, 11):                                                                                                                                                                                                                                                                                                                                                                                                                                                            
@@ -140,21 +127,13 @@ for i in range(1, 11):
     if i==1:
         header.extend(['AADHAAR_NAME','ADMISSION_YEAR'])
 
-# Define all possible subject keys (including empty ones)
-# subject_keys = [
-#     "SUB1NM", "SUB1", "SUB1_TH_MAX", "SUB1_PR_MAX", "SUB1_CE_MAX",
-#     "SUB1_TH_MRKS", "SUB1_PR_MRKS", "SUB1_CE_MRKS", "SUB1_TOT", "SUB1_GRADE",
-#     "SUB1_GRADE_POINTS", "SUB1_CREDIT", "SUB1_CREDIT_POINTS", "SUB1_REMARKS",
-#     "SUB1_CREDIT_ELIGIBILITY",
-#     "", "", "", "", "", "", "", "", "", ""  # 10 empty keys for remaining subjects
-# ]
+
 
 with open(outputFilePath, "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(header)
 
-    # writer = csv.DictWriter(csvfile, fieldnames=subject_keys)
-    # writer.writeheader()
+    
 
     for student_id, student_data in data.items():
         # Combine common student data with empty subject details
@@ -171,6 +150,8 @@ with open(outputFilePath, "w", newline="") as csvfile:
                     gradePoints+= 0 if value=='' else int(value) 
             if i==1:
                 row.extend(['',''])
+
+            i+=1
         row[30] = str(gradePoints) 
         
         writer.writerow(row)
